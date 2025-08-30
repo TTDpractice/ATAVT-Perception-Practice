@@ -125,6 +125,15 @@
             answers: ['Motor Vehicle']
         }
     ];
+
+    // Preload images to ensure they are cached before the first round
+    // This avoids the initial network latency being counted toward the exposure time.
+    const preloadedImages = [];
+    baseCards.forEach(card => {
+        const img = new Image();
+        img.src = card.src;
+        preloadedImages.push(img);
+    });
     // Duplicate base cards to make a deck of 50 items
     let deck = [];
     for (let i = 0; i < 10; i++) {
