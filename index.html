@@ -117,7 +117,7 @@
         <img id="main-image" src="" alt="Practice image" style="display:none;">
     </div>
     <div id="options">
-        <div>
+        <div id="checkboxes">
             <label><input type="checkbox" value="Pedestrian">Pedestrian</label>
             <label><input type="checkbox" value="Motorbike / Bicycle">Motorbike / Bicycle</label>
             <label><input type="checkbox" value="Road Sign">Road Sign</label>
@@ -126,10 +126,14 @@
         </div>
         <div style="margin-top: 15px;">
             <button id="submit">Submit</button>
-            <button id="next" style="display:none;">Next</button>
+            <!-- Next button moved outside options -->
         </div>
     </div>
     <div id="feedback"></div>
+    <!-- Place next button outside the options so it remains visible after options are hidden -->
+    <div style="text-align:center; margin-top:15px;">
+        <button id="next" style="display:none;">Next</button>
+    </div>
     </div><!-- end container -->
     <script>
     // Base cards for each category with representative images
