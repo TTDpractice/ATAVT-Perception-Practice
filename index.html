@@ -148,7 +148,8 @@
         },
         {
             src: 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Speed_limit_15_mph_sign.jpg',
-            answers: ['Road Sign']
+            // This sign stands in front of a parked car, so classify as both a road sign and a motor vehicle
+            answers: ['Motor Vehicle', 'Road Sign']
         },
         {
             src: 'https://upload.wikimedia.org/wikipedia/commons/9/97/Regent_Street_traffic_light_-_London_in_the_snow.jpg',
@@ -204,6 +205,27 @@
             src: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Mm00a_1704_Lex_Car_Urb_G6_(207143029).jpeg',
             answers: ['Motor Vehicle']
         }
+        ,
+        {
+            // Traffic lights control a narrow stretch of road in Halewood, UK (Ian Greig, CC BY‑SA 2.0)
+            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Traffic_lights_control_a_narrow_stretch_of_road_-_geograph.org.uk_-_2830399.jpg/960px-Traffic_lights_control_a_narrow_stretch_of_road_-_geograph.org.uk_-_2830399.jpg',
+            answers: ['Motor Vehicle', 'Traffic Light', 'Road Sign']
+        },
+        {
+            // Crossroads with traffic lights in Westerleigh, UK (Maurice Pullin, CC BY‑SA 2.0)
+            src: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Crossroads_with_traffic_lights_-_geograph.org.uk_-_1510961.jpg',
+            answers: ['Motor Vehicle', 'Traffic Light', 'Road Sign']
+        },
+        {
+            // Car slows down while passing cyclist, Mullaghmore (Kenneth Allen, CC BY‑SA 2.0)
+            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Car_slows_down_while_passing_cyclist%2C_Mullaghmore_-_geograph.org.uk_-_6359686.jpg/960px-Car_slows_down_while_passing_cyclist%2C_Mullaghmore_-_geograph.org.uk_-_6359686.jpg',
+            answers: ['Motor Vehicle', 'Motorbike / Bicycle']
+        },
+        {
+            // Directional road sign on Gala Water Bridge with vehicles (Walter Baxter, CC BY‑SA 2.0)
+            src: 'https://upload.wikimedia.org/wikipedia/commons/8/88/A_road_sign_on_Gala_Water_Bridge_-_geograph.org.uk_-_1271511.jpg',
+            answers: ['Motor Vehicle', 'Road Sign']
+        }
     ];
 
     // Preload images to ensure they are cached before the first round
@@ -214,11 +236,8 @@
         img.src = card.src;
         preloadedImages.push(img);
     });
-    // Duplicate base cards to make a deck of 50 items
-    let deck = [];
-    for (let i = 0; i < 10; i++) {
-        deck = deck.concat(JSON.parse(JSON.stringify(baseCards)));
-    }
+    // Build a deck from the base cards.  Each unique image should appear once before any repeats.
+    let deck = [...baseCards];
     // Shuffle the deck so that items appear in random order
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -257,6 +276,9 @@
         }, exposure);
     }
     startBtn.addEventListener('click', () => {
+        // Reset for a new practice session: shuffle deck and start from first card
+        shuffle(deck);
+        currentIndex = 0;
         feedbackDiv.textContent = '';
         showImage();
     });
@@ -287,7 +309,13 @@
         });
         feedbackDiv.textContent = `Correct: ${correct} | Missed: ${missed} | Incorrect: ${incorrect}`;
         // Prepare for next card but do not advance immediately
-        currentIndex = (currentIndex + 1) % deck.length;
+        // Advance to the next card.  If we have reached the end of the deck,
+        // reshuffle to avoid repeats and start from the beginning.
+        currentIndex += 1;
+        if (currentIndex >= deck.length) {
+            shuffle(deck);
+            currentIndex = 0;
+        }
         // Hide options and enable next button; disable submit to prevent repeat submissions
         optionsDiv.style.display = 'none';
         submitBtn.disabled = true;
