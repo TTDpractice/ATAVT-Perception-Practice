@@ -9,8 +9,17 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f9f9f9;
+            background-color: #f0f4f8;
             color: #333;
+        }
+        /* Main container to give content a card-like feel */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
         h1 {
             text-align: center;
@@ -46,11 +55,12 @@
             display: inline-block;
             margin: 5px 10px;
             padding: 10px 15px;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            background: #f7f8fa;
+            border: 1px solid #ddd;
+            border-radius: 6px;
             cursor: pointer;
             user-select: none;
+            transition: background 0.2s, border-color 0.2s;
         }
         #options label input {
             margin-right: 8px;
@@ -60,16 +70,33 @@
             font-weight: bold;
         }
         button {
-            padding: 8px 16px;
+            padding: 10px 20px;
             font-size: 1rem;
             cursor: pointer;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
+            transition: opacity 0.2s;
+        }
+        /* Primary buttons */
+        #start, #next {
             background: #007bff;
             color: #fff;
         }
+        /* Submit button */
+        #submit {
+            background: #28a745;
+            color: #fff;
+        }
+        /* Reveal button */
+        #reveal {
+            background: #6c757d;
+            color: #fff;
+        }
+        button:hover:not(:disabled) {
+            opacity: 0.9;
+        }
         button:disabled {
-            background: #888;
+            opacity: 0.6;
         }
         .small {
             font-size: 0.9rem;
@@ -77,6 +104,7 @@
     </style>
 </head>
 <body>
+    <div class="container">
     <h1>ScotRail Stage 2 Visual Recall Practice</h1>
     <div id="controls">
         <label class="small">Exposure time (ms):
@@ -98,9 +126,11 @@
         </div>
         <div style="margin-top: 15px;">
             <button id="submit">Submit</button>
+            <button id="next" style="display:none;">Next</button>
         </div>
     </div>
     <div id="feedback"></div>
+    </div><!-- end container -->
     <script>
     // Base cards for each category with representative images
     const baseCards = [
@@ -155,6 +185,7 @@
     const startBtn = document.getElementById('start');
     const revealBtn = document.getElementById('reveal');
     const submitBtn = document.getElementById('submit');
+    const nextBtn = document.getElementById('next');
     function showImage() {
         const exposure = parseInt(document.getElementById('exposure').value) || 1000;
         const card = deck[currentIndex];
@@ -163,6 +194,8 @@
         imgEl.style.display = 'block';
         optionsDiv.style.display = 'none';
         revealBtn.disabled = true;
+        // Hide next button when showing a new image
+        nextBtn.style.display = 'none';
         // Clear previous selections
         document.querySelectorAll('#options input[type="checkbox"]').forEach(cb => cb.checked = false);
         // Hide image after exposure
@@ -203,9 +236,17 @@
             }
         });
         feedbackDiv.textContent = `Correct: ${correct} | Missed: ${missed} | Incorrect: ${incorrect}`;
-        // Advance to next card
+        // Prepare for next card but do not advance immediately
         currentIndex = (currentIndex + 1) % deck.length;
-        // Immediately show next image
+        // Hide options and enable next button; disable submit to prevent repeat submissions
+        optionsDiv.style.display = 'none';
+        submitBtn.disabled = true;
+        nextBtn.style.display = 'inline-block';
+    });
+    // Handler for Next button - moves to the next card when user is ready
+    nextBtn.addEventListener('click', () => {
+        feedbackDiv.textContent = '';
+        submitBtn.disabled = false;
         showImage();
     });
     </script>
