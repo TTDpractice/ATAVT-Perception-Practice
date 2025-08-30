@@ -140,7 +140,7 @@
     const baseCards = [
         {
             src: 'https://upload.wikimedia.org/wikipedia/commons/c/c0/Pedestrian_Crossing_area_at_traffic_Lights,_Friern_Barnet,_London_N11_-_geograph.org.uk_-_898567.jpg',
-            answers: ['Pedestrian']
+            answers: ['Traffic Light', 'Motor Vehicle']
         },
         {
             src: 'https://upload.wikimedia.org/wikipedia/commons/c/c6/Wheelies_on_cycle_superhighway,_Hyde_Park_-_geograph.org.uk_-_5115742.jpg',
@@ -157,18 +157,18 @@
         },
         {
             src: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Great_Portland_Street_London_Traffic.jpg',
-            answers: ['Motor Vehicle']
+            answers: ['Motor Vehicle', 'Pedestrian']
         },
         // Additional practice images pulled from public‑domain and freely licensed sources
         {
             // Pedestrians crossing a busy New York street (Unsplash CC0)
             src: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/People_crossing_street_(Unsplash).jpg',
-            answers: ['Pedestrian']
+            answers: ['Pedestrian', 'Traffic Light']
         },
         {
             // Pedestrians crossing in downtown Washington, D.C. (CC BY‑SA 2.5)
             src: 'https://upload.wikimedia.org/wikipedia/commons/3/34/Pedestrians_crossing_the_street_in_downtown_Washington_DC.jpg',
-            answers: ['Pedestrian']
+            answers: ['Pedestrian', 'Motor Vehicle']
         },
         {
             // Cyclist waiting at traffic lights in Manchester (CC BY‑SA 2.0)
@@ -198,34 +198,15 @@
         {
             // Night‑time traffic with cars on a city street (CC0)
             src: 'https://upload.wikimedia.org/wikipedia/commons/0/0d/Cars-traffic-night-street_(23698687744).jpg',
-            answers: ['Motor Vehicle']
+            answers: ['Motor Vehicle', 'Traffic Light']
         },
         {
             // City street with blurred car trails (CC0)
             src: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Mm00a_1704_Lex_Car_Urb_G6_(207143029).jpeg',
             answers: ['Motor Vehicle']
         }
-        ,
-        {
-            // Traffic lights control a narrow stretch of road in Halewood, UK (Ian Greig, CC BY‑SA 2.0)
-            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Traffic_lights_control_a_narrow_stretch_of_road_-_geograph.org.uk_-_2830399.jpg/960px-Traffic_lights_control_a_narrow_stretch_of_road_-_geograph.org.uk_-_2830399.jpg',
-            answers: ['Motor Vehicle', 'Traffic Light', 'Road Sign']
-        },
-        {
-            // Crossroads with traffic lights in Westerleigh, UK (Maurice Pullin, CC BY‑SA 2.0)
-            src: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Crossroads_with_traffic_lights_-_geograph.org.uk_-_1510961.jpg',
-            answers: ['Motor Vehicle', 'Traffic Light', 'Road Sign']
-        },
-        {
-            // Car slows down while passing cyclist, Mullaghmore (Kenneth Allen, CC BY‑SA 2.0)
-            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Car_slows_down_while_passing_cyclist%2C_Mullaghmore_-_geograph.org.uk_-_6359686.jpg/960px-Car_slows_down_while_passing_cyclist%2C_Mullaghmore_-_geograph.org.uk_-_6359686.jpg',
-            answers: ['Motor Vehicle', 'Motorbike / Bicycle']
-        },
-        {
-            // Directional road sign on Gala Water Bridge with vehicles (Walter Baxter, CC BY‑SA 2.0)
-            src: 'https://upload.wikimedia.org/wikipedia/commons/8/88/A_road_sign_on_Gala_Water_Bridge_-_geograph.org.uk_-_1271511.jpg',
-            answers: ['Motor Vehicle', 'Road Sign']
-        }
+        
+       
     ];
 
     // Preload images to ensure they are cached before the first round
